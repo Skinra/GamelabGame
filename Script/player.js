@@ -14,9 +14,13 @@ function OnCollisionEnter2D(){
 	}
 }
 
+
 function move(){
-    
-    // deplacement du personnage
+
+	var haut = GameObject.Find("Haut");
+	var bas = GameObject.Find("Bas");
+	var gauche = GameObject.Find("left");
+	var droite = GameObject.Find("Right");
     
     // deplacement gauche droite 
 	var inputx : float = Input.GetAxis("Horizontal");
@@ -34,12 +38,37 @@ function move(){
 	var bottomborder = Camera.main.ViewportToWorldPoint(Vector3(0,1,playerdist)).y; //bas
 		
 	transform.position.x = Mathf.Clamp(transform.position.x, leftborder, rightborder); //math.clamp permet de delimiter
-	transform.position.y = Mathf.Clamp(transform.position.y, topborder, bottomborder); //math.clamp permet de delimiter
+	transform.position.y = Mathf.Clamp(transform.position.y, topborder, bottomborder); //math.clamp permet de delimiter 
 	
-	transform.Translate(Time.deltaTime * 1.05 + inputx / 7, inputy / 7, 0);
+	transform.Translate(inputx / 10, inputy / 10, 0);
 	
+	if(Input.GetKeyDown(KeyCode.DownArrow)){
+		haut.renderer.enabled = false;
+		gauche.renderer.enabled = false;
+		droite.renderer.enabled = false;
+		bas.renderer.enabled = true;
+	}
+	else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+		haut.renderer.enabled = false;
+		gauche.renderer.enabled = true;
+		droite.renderer.enabled = false;
+		bas.renderer.enabled = false;
+	}
+	else if(Input.GetKeyDown(KeyCode.RightArrow)){
+		haut.renderer.enabled = false;
+		gauche.renderer.enabled = false;
+		droite.renderer.enabled = true;
+		bas.renderer.enabled = false;
+	}
+	else if(Input.GetKeyDown(KeyCode.UpArrow)){
+		haut.renderer.enabled = true;
+		gauche.renderer.enabled = false;
+		droite.renderer.enabled = false;
+		bas.renderer.enabled = false;
+	}
 }
 
 function Update () {
 	move();
+
 }
