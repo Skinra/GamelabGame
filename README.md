@@ -1,7 +1,7 @@
 The adventure of Spike
 ===========
 
-The adventure of Spike is a game made with Unity in the purpose of our Training in DUT MMI. 
+The adventure of Spike is a 2D game made with Unity in the purpose of our Training in DUT MMI. 
 
 Who make the adventure of Spike ? The Gamelab team of course :P
 ===========
