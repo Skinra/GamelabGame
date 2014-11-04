@@ -2,8 +2,11 @@ Character
 =========
 
 Perso Avant.png
+
 Perso Arriere.png
+
 Perso Gauche.png
+
 Perso Droite.png
 
 Landscape - Common texture
