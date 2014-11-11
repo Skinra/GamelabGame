@@ -1,4 +1,4 @@
-#pragma strict
+﻿#pragma strict
 
 var customGuiStyle : GUIStyle;
 
@@ -35,11 +35,25 @@ function OnGUI(){
     
     if(GUI.Button(Rect(x + 100, y + 225, 80,80), buttonSettings, customGuiStyle)){
     	Debug.Log('Settings');
+    	Application.LoadLevel("Parametre");
     }
-    
-    
+}
+
+function getIsound(){
+	var soundObj = gameObject.Find("Developers");
+	
+	var isactivate = PlayerPrefs.GetInt("Activate");
+	
+	if(isactivate == 1){
+		soundObj.audio.mute = false;
+		PlayerPrefs.SetInt("activateingui", 1);
+	}
+	else{
+		soundObj.audio.mute = true;
+		PlayerPrefs.SetInt("activateingui", 0);
+	}
 }
 
 function Update () {
-
+	getIsound();
 }
