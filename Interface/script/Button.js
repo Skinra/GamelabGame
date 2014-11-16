@@ -30,7 +30,7 @@ function OnGUI(){
     }
     
     if(GUI.Button(Rect(x - 150,y + 225, 80, 80), buttonBoutique, customGuiStyle)){
-    	Debug.Log('Boutique');
+    	Application.LoadLevel('Store');
     }
     
     if(GUI.Button(Rect(x + 100, y + 225, 80,80), buttonSettings, customGuiStyle)){

@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-var customGuiStyle : GUIStyle;
+var customGuiStyle = new GUIStyle();
 
 // toggle button
 
@@ -9,17 +9,12 @@ private var toggleGsound : boolean = false;
 private var loop : int = 0;
 
 function Start () {
-
+	customGuiStyle.fontSize = 18;
+	customGuiStyle.normal.textColor = Color.white;
+	customGuiStyle.font = Resources.Load("small_font");
 }
 
-/*function getISound(){
-	if(loop == 0){
-		var activate = 
-		loop = 1;
-	}
 
-	return activate;
-}*/
 
 function OnGUI(){
 
@@ -49,9 +44,9 @@ function OnGUI(){
 	GUI.DrawTexture(Rect(x2+75,110,300,1), bar);
 	GUI.DrawTexture(Rect(x2 + 75, 180, 300, 1), bar);
 	GUI.DrawTexture(Rect(x2 + 75, 250, 300, 1), bar);
-	GUI.Label(Rect(x2 - 100, 100, 250,100), "Interface sound");
-	GUI.Label(Rect(x2 - 100, 170, 250,100), "Game sound");
-	GUI.Label(Rect(x2 - 100, 240, 250,100), "Screen size");
+	GUI.Label(Rect(x2 - 100, 100, 250,100), "Interface sound", customGuiStyle);
+	GUI.Label(Rect(x2 - 100, 170, 250,100), "Game sound", customGuiStyle);
+	GUI.Label(Rect(x2 - 100, 240, 250,100), "Screen size", customGuiStyle);
 	
 
 	toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
