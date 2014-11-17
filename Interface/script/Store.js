@@ -1,16 +1,26 @@
-﻿#pragma strict
+#pragma strict
 
 
 var customGuiStyle = new GUIStyle();
+var customscrollGUIHori : GUISkin;
+var customscrollGUIVert : GUISkin;
+
+
+
 var scrollPosition : Vector2 = Vector2.zero;
+var scrollPosition2 : Vector2 = Vector2.zero;
 
 var x = (Screen.width / 2) - (180 / 2);
 var h = Screen.height;
 
-// variable use by the store
+// molecule
 var atomeArray = ['carbone', 'hydrogene', 'methane', 'methyl'];
 var prixAtome = ['$50000', '$10000', '$500', '$25000'];
 
+// fiole
+
+var fioleArray = ['fiole1', 'fiole2', 'fiole3', 'fiole4'];
+var prixFiole = ['$1', '$2', '$0.5', '$50'];
 
 function Start () {
 	customGuiStyle.fontSize = 18;
@@ -48,50 +58,97 @@ function OnGUI(){
 		--> 4 : reproduire
 	
 	*/
+	
+	// molecule
 
-	scrollPosition = GUI.BeginScrollView (Rect (55,155,500,390),scrollPosition, Rect (0, 0, 0, 600));
+	scrollPosition = GUI.BeginScrollView (Rect (0,155,450,390),scrollPosition, Rect (0, 0, 0, 600), customscrollGUIHori, customscrollGUIVert);
 			
-		GUI.BeginGroup(Rect(15,0,470,150));
-			// image de la molécule
-			if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
-			}
-			// texte de la molécule
-			GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
-			GUI.DrawTexture(Rect(75,130,200,1), hBar);
-			GUI.Label(Rect(280,125,200,50), "$500.000", customGuiStyle);
-		GUI.EndGroup();
+			GUI.BeginGroup(Rect(15,0,470,150));
+				// image de la molécule
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$500.000", customGuiStyle);
+			GUI.EndGroup();
+				
 			
+			GUI.BeginGroup(Rect(15,145,470,150));
+				// image de la molécule
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric  ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
+			GUI.EndGroup();
+			
+			GUI.BeginGroup(Rect(15,290,470,150));
+				// image de la molécule
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
+			GUI.EndGroup();
 		
-		GUI.BeginGroup(Rect(15,145,470,150));
-			// image de la molécule
-			if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
-			}
-			// texte de la molécule
-			GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric  ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
-			GUI.DrawTexture(Rect(75,130,200,1), hBar);
-			GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
-		GUI.EndGroup();
+			GUI.BeginGroup(Rect(15,435,470,150));
+				// image de la molécule
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
+			GUI.EndGroup();	
 		
-		GUI.BeginGroup(Rect(15,290,470,150));
-			// image de la molécule
-			if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
-			}
-			// texte de la molécule
-			GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
-			GUI.DrawTexture(Rect(75,130,200,1), hBar);
-			GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
-		GUI.EndGroup();
+		GUI.EndScrollView();
 		
-		GUI.BeginGroup(Rect(15,435,470,150));
-			// image de la molécule
-			if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
-			}
-			// texte de la molécule
-			GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
-			GUI.DrawTexture(Rect(75,130,200,1), hBar);
-			GUI.Label(Rect(280,125,200,50), "$250.000", customGuiStyle);
-		GUI.EndGroup();	
-		GUI.EndScrollView ();		
+		// fioles
+		
+		scrollPosition2 = GUI.BeginScrollView(Rect(x+50,155,450,390),scrollPosition2, Rect(x+50, 0, 0, 600));
+		
+			GUI.BeginGroup(Rect(x+75,0,470,390), childrentestTexture);
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$2", customGuiStyle);
+			GUI.EndGroup();
+			
+			GUI.BeginGroup(Rect(x+75,145, 470,390), childrentestTexture);
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$5", customGuiStyle);
+			GUI.EndGroup();
+			
+			GUI.BeginGroup(Rect(x+75,290, 470,390), childrentestTexture);
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$3", customGuiStyle);
+			GUI.EndGroup();
+			
+			GUI.BeginGroup(Rect(x+75,435, 470,390), childrentestTexture);
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				}
+				// texte de la molécule
+				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
+				GUI.DrawTexture(Rect(75,130,200,1), hBar);
+				GUI.Label(Rect(280,125,200,50), "$200", customGuiStyle);
+			GUI.EndGroup();
+		GUI.EndScrollView();
+		
+		// trying to apply a style to the scrollbar
+						
 }
 
 function Update () {
