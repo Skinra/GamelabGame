@@ -5,13 +5,8 @@ var customGuiStyle = new GUIStyle();
 var customscrollGUIHori : GUISkin;
 var customscrollGUIVert : GUISkin;
 
-
-
 var scrollPosition : Vector2 = Vector2.zero;
 var scrollPosition2 : Vector2 = Vector2.zero;
-
-var x = (Screen.width / 2) - (180 / 2);
-var h = Screen.height;
 
 // molecule
 var atomeArray = ['carbone', 'hydrogene', 'methane', 'methyl'];
@@ -30,6 +25,9 @@ function Start () {
 }
 
 function OnGUI(){
+
+	var x = Screen.width / 2 - (180 / 2);
+	var h = Screen.height;
 	
 	// Interface de base
 	var ButtonExit : Texture = Resources.Load("exit");
@@ -49,19 +47,9 @@ function OnGUI(){
 	GUI.Label(Rect(x + 225, 100, 250,100), "Fioles", customGuiStyle);
 	// Wraper boutiquue
 
-	/* disposition possible 
-	
-		--> 1: ajout d'u scroll CONTAINER
-		--> 2 : Utiliser GUI.BeginGroup(Rect(x,y,width,height))
-			--> placer tous les elements d'un produit de la boutique dedans, image, prix, HumanDescription
-		--> 3 : fermer le groupe 
-		--> 4 : reproduire
-	
-	*/
-	
 	// molecule
 
-	scrollPosition = GUI.BeginScrollView (Rect (0,155,450,390),scrollPosition, Rect (0, 0, 0, 600), customscrollGUIHori, customscrollGUIVert);
+	scrollPosition = GUI.BeginScrollView (Rect (x-500,155,450,390),scrollPosition, Rect (0, 0, 0, 600), customscrollGUIHori, customscrollGUIVert);
 			
 			GUI.BeginGroup(Rect(15,0,470,150));
 				// image de la molécule
@@ -146,11 +134,9 @@ function OnGUI(){
 				GUI.Label(Rect(280,125,200,50), "$200", customGuiStyle);
 			GUI.EndGroup();
 		GUI.EndScrollView();
-		
-		// trying to apply a style to the scrollbar
-						
+								
 }
 
 function Update () {
-
+	
 }
