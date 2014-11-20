@@ -26,7 +26,7 @@ function Start () {
 
 function OnGUI(){
 
-	var x = Screen.width / 2 - (180 / 2);
+	var x = (Screen.width / 2) - 50;
 	var h = Screen.height;
 	
 	// Interface de base
@@ -133,10 +133,24 @@ function OnGUI(){
 				GUI.DrawTexture(Rect(75,130,200,1), hBar);
 				GUI.Label(Rect(280,125,200,50), "$200", customGuiStyle);
 			GUI.EndGroup();
-		GUI.EndScrollView();
-								
+		GUI.EndScrollView();							
+}
+
+function getIsound(){
+	var soundObj = gameObject.Find("Developers");
+	
+	var isactivate = PlayerPrefs.GetInt("Activate");
+	
+	if(isactivate == 1){
+		soundObj.audio.mute = false;
+		//PlayerPrefs.SetInt("activateingui", 1);
+	}
+	else{
+		soundObj.audio.mute = true;
+		//PlayerPrefs.SetInt("activateingui", 0);
+	}
 }
 
 function Update () {
-	
+	getIsound();
 }
