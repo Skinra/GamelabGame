@@ -63,15 +63,6 @@ function OnGUI(){
 		Application.LoadLevel("Interface");
 	}
 	
-	//Debug.Log(activeornot);
-	
-	/*if(activeornot == 1){
-			toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonTrue, customGuiStyle);
-			soundObj.audio.mute = false;
-			toggleIsound = true;
-			Debug.Log(toggleIsound);
-	}*/
-	
 	if(toggleIsound){
 		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
 		soundObj.audio.mute = true;
