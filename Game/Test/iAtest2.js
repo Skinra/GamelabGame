@@ -7,6 +7,7 @@
  var range2 : float=10f;
  var stop : float=0;
  var myTransform : Transform; //current transform data of this enemy
+ 
 
  function Awake()
  {
@@ -20,14 +21,19 @@
   
  function Update () {
  
+ 	var timeY : float = Time.deltaTime;
+	var targetClamp = Mathf.Round(target.transform.position.x * 100) / 100;
+	var playerClamp = Mathf.Round(this.transform.position.x * 100) / 100;
+	
+	Debug.Log(targetClamp);
  	// textureimg
  	
- 	var haut = GameObject.Find("Hautennemi");
-	var bas = GameObject.Find("Basennemi");
+ 	//var haut = GameObject.Find("Hautennemi");
+	//var bas = GameObject.Find("Basennemi");
 	var droite = GameObject.Find("Droiteennemi");
 	var gauche = GameObject.Find("Gaucheennemi");
  
- 	var timeY : float = Time.deltaTime;
+ 	
      //rotate to look at the player
     var playerdist = (transform.position.y - Camera.main.transform.position.y); // calcul la position du player par rapport à la caméra
 	
@@ -42,7 +48,7 @@
 	transform.position.y = Mathf.Clamp(transform.position.y, topborder, bottomborder); //math.clamp permet de delimiter
 	
 	
-	if(target.transform.position.x < this.transform.position.x){
+	if(targetClamp < playerClamp){
 		//this.transform.Translate(,0,0);
 		if(target.transform.position.y < this.transform.position.y){
 			this.transform.Translate( -Time.deltaTime,-timeY * 0.5,0);
@@ -51,12 +57,12 @@
 			this.transform.Translate( -Time.deltaTime,timeY * 0.5,0);
 		}
 		
-		haut.renderer.enabled = false;
+		//haut.renderer.enabled = false;
 		gauche.renderer.enabled = true;
 		droite.renderer.enabled = false;
-		bas.renderer.enabled = false;
+		//bas.renderer.enabled = false;
 	}
-	else if(target.transform.position.x > this.transform.position.x){
+	else if(targetClamp > playerClamp){
 		//this.transform.Translate(,0,0);
 		if(target.transform.position.y < this.transform.position.y){
 			this.transform.Translate( Time.deltaTime,-timeY * 0.5,0);
@@ -65,10 +71,10 @@
 			this.transform.Translate( Time.deltaTime,timeY * 0.5,0);
 		}
 		
-		haut.renderer.enabled = false;
+		//haut.renderer.enabled = false;
 		gauche.renderer.enabled = false;
 		droite.renderer.enabled = true;
-		bas.renderer.enabled = false;
+		//bas.renderer.enabled = false;
 	}
 	else{
 		this.transform.Translate(0,0,0);
