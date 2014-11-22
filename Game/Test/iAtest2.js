@@ -7,6 +7,7 @@
  var range2 : float=10f;
  var stop : float=0;
  var myTransform : Transform; //current transform data of this enemy
+
  function Awake()
  {
      myTransform = transform; //cache transform data for easy access/preformance
@@ -15,10 +16,18 @@
  function Start()
  {
       target = GameObject.Find("Player");
-  
  }
   
  function Update () {
+ 
+ 	// textureimg
+ 	
+ 	var haut = GameObject.Find("Hautennemi");
+	var bas = GameObject.Find("Basennemi");
+	var droite = GameObject.Find("Droiteennemi");
+	var gauche = GameObject.Find("Gaucheennemi");
+ 
+ 	var timeY : float = Time.deltaTime;
      //rotate to look at the player
     var playerdist = (transform.position.y - Camera.main.transform.position.y); // calcul la position du player par rapport à la caméra
 	
@@ -32,33 +41,36 @@
 	transform.position.x = Mathf.Clamp(transform.position.x, leftborder, rightborder); //math.clamp permet de delimiter
 	transform.position.y = Mathf.Clamp(transform.position.y, topborder, bottomborder); //math.clamp permet de delimiter
 	
-	Debug.Log(target.transform.position.x);
-	Debug.Log(this.transform.position.x);
 	
 	if(target.transform.position.x < this.transform.position.x){
 		//this.transform.Translate(,0,0);
 		if(target.transform.position.y < this.transform.position.y){
-			this.transform.Translate( -Time.deltaTime,-Time.deltaTime,0);
+			this.transform.Translate( -Time.deltaTime,-timeY * 0.5,0);
 		}
 		else if(target.transform.position.y > this.transform.position.y){
-			this.transform.Translate( -Time.deltaTime,Time.deltaTime,0);
+			this.transform.Translate( -Time.deltaTime,timeY * 0.5,0);
 		}
+		
+		haut.renderer.enabled = false;
+		gauche.renderer.enabled = true;
+		droite.renderer.enabled = false;
+		bas.renderer.enabled = false;
 	}
 	else if(target.transform.position.x > this.transform.position.x){
 		//this.transform.Translate(,0,0);
 		if(target.transform.position.y < this.transform.position.y){
-			this.transform.Translate( Time.deltaTime,-Time.deltaTime,0);
+			this.transform.Translate( Time.deltaTime,-timeY * 0.5,0);
 		}
 		else if(target.transform.position.y > this.transform.position.y){
-			this.transform.Translate( Time.deltaTime,Time.deltaTime,0);
+			this.transform.Translate( Time.deltaTime,timeY * 0.5,0);
 		}
+		
+		haut.renderer.enabled = false;
+		gauche.renderer.enabled = false;
+		droite.renderer.enabled = true;
+		bas.renderer.enabled = false;
 	}
 	else{
 		this.transform.Translate(0,0,0);
 	}
-	
-	
-	
-     
-  
  }
