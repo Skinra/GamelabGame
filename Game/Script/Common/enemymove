@@ -19,6 +19,8 @@
  	// speed of the player
  	var timeY : float = Time.deltaTime;
  	
+  if(target){
+  
  	// Round the value to remove the shaking effect.. 
 	var targetClamp = Mathf.Round(target.transform.position.x * 100) / 100;
 	var playerClamp = Mathf.Round(this.transform.position.x * 100) / 100;
@@ -55,10 +57,10 @@
 	}
 	else if(targetClamp > playerClamp){
 		if(target.transform.position.y < this.transform.position.y){
-			this.transform.Translate( Time.deltaTime,-timeY * 0.5,0);
+			this.transform.Translate(Time.deltaTime,-timeY * 0.5,0);
 		}
 		else if(target.transform.position.y > this.transform.position.y){
-			this.transform.Translate( Time.deltaTime,timeY * 0.5,0);
+			this.transform.Translate(Time.deltaTime,timeY * 0.5,0);
 		}
 		
 		haut.renderer.enabled = false;
@@ -83,4 +85,5 @@
 	else{
 		this.transform.Translate(0,0,0);
 	}
+ 	}
  }
