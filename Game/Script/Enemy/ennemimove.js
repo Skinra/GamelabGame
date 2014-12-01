@@ -1,4 +1,4 @@
-#pragma strict
+﻿#pragma strict
 
  var target : GameObject; //the enemy's target
  var StartPosX : float;
@@ -23,8 +23,8 @@
 	var droite : Transform = transform.Find("Droiteennemi");
 	var gauche : Transform = transform.Find("Gaucheennemi");
   	
-  	if(target.transform.position.x < 0.0){
-  		if(posRound > 1.0){
+  	if(target.transform.position.x > 0.0){
+  		if(posRound > 0.7){
 		 		// Round the value to remove the shaking effect.. 
 				var targetRound = Mathf.Round(target.transform.position.x * 10) / 10;
 				var playerRound = Mathf.Round(this.transform.position.x * 10) / 10;
@@ -75,8 +75,8 @@
 	else{
 		transform.position = Vector2.MoveTowards(this.transform.position, Vector2(StartPosX, StartPosY), 0.5 * Time.deltaTime);
 		haut.renderer.enabled = false;
-		gauche.renderer.enabled = true;
-		droite.renderer.enabled = false;
+		gauche.renderer.enabled = false;
+		droite.renderer.enabled = true;
 		bas.renderer.enabled = false;
 	}
 	

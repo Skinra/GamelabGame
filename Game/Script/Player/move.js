@@ -1,4 +1,4 @@
-#pragma strict
+﻿#pragma strict
 var health : int = 3;
 
 
@@ -9,16 +9,13 @@ function Start () {
 
 function OnCollisionEnter2D(){
 	health = health - 1;
-	
+
 	if(health == 0){
 		Destroy(this.gameObject);
 	}
 }
 
 function move(){
- 
-    // deplacement du personnage
-    
     // deplacement gauche droite 
 	var inputx : float = Input.GetAxis("Horizontal");
     
