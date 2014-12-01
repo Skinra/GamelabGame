@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 var customGuiStyle = new GUIStyle();
 
@@ -7,27 +7,35 @@ var customGuiStyle = new GUIStyle();
 private var toggleIsound : boolean = false;
 private var toggleGsound : boolean = false;
 private var loop : int = 0;
+private var oldValue : boolean;
+/*private var activeornot : int;
+private var oldactiveornot : int;*/
+var activeornot : int;
+
 
 function Start () {
 	customGuiStyle.fontSize = 18;
 	customGuiStyle.normal.textColor = Color.white;
 	customGuiStyle.font = Resources.Load("small_font");
+	loop = 0;
 }
-
-
 
 function OnGUI(){
 
-	var activeornot : int = PlayerPrefs.GetInt("activateingui");
-	var oldactiveornot : int;
-	var loop = 0;
+	var soundObj = gameObject.Find("Developers");
 	
-	if(activeornot != oldactiveornot && loop == 0){
-		oldactiveornot = activeornot;
+	if(loop == 0){
+		activeornot = PlayerPrefs.GetInt("activateingui");
+		Debug.Log(activeornot);
 		loop = 1;
+		
+		if(activeornot == 1){
+			toggleIsound = false;
+		}
+		else{
+			toggleIsound = true;
+		}
 	}
-	
-	Debug.Log(oldactiveornot);
 	
 	var x = (Screen.width / 2) - (180 / 2);
 	var x2 = Screen.width / 4;
@@ -48,44 +56,29 @@ function OnGUI(){
 	GUI.Label(Rect(x2 - 100, 170, 250,100), "Game sound", customGuiStyle);
 	GUI.Label(Rect(x2 - 100, 240, 250,100), "Screen size", customGuiStyle);
 	
-
-	toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
+	//toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
 	toggleGsound = GUI.Toggle(Rect(x + 220, 160,40,40),toggleGsound, buttonFalse, customGuiStyle);
 	
-	if(oldactiveornot == 1){
-		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonTrue, customGuiStyle);
-		if(toggleIsound){
-			oldactiveornot = 0;
-			
-			toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
-			
-		}
-		saveIsound(oldactiveornot);
-	}
-	else if(oldactiveornot == 0){
-		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
-		if(toggleIsound){
-			toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonTrue, customGuiStyle);
-			oldactiveornot = 1;
-		}
-		saveIsound(oldactiveornot);
-	}
-	
-	/*if(toggleIsound){
-		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonTrue, customGuiStyle);
-	}*/
-	
-	Debug.Log(oldactiveornot);
-	
-	if(toggleGsound){
-		toggleGsound = GUI.Toggle(Rect(x + 220, 160,40,40),toggleGsound, buttonTrue, customGuiStyle);
-	}
-	
 	if(GUI.Button(Rect(x,0,100,100), ButtonExit, customGuiStyle)){
-		loop = 0;
 		Application.LoadLevel("Interface");
 	}
 	
+	if(toggleIsound){
+		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonFalse, customGuiStyle);
+		soundObj.audio.mute = true;
+		activeornot = 0;
+		saveIsound(0);
+	}
+	else if(toggleIsound == false){
+		
+		Debug.Log(toggleIsound);
+		
+		toggleIsound = GUI.Toggle(Rect(x + 220, 90,40,40),toggleIsound, buttonTrue, customGuiStyle);
+		soundObj.audio.mute = false;
+		activeornot = 1;
+		saveIsound(1);
+	}
+
 }
 
 function saveIsound(toggleIsound){
