@@ -1,4 +1,4 @@
-#pragma strict
+﻿#pragma strict
 
 
 var customGuiStyle = new GUIStyle();
@@ -49,7 +49,7 @@ function OnGUI(){
 
 	// molecule
 
-	scrollPosition = GUI.BeginScrollView (Rect (x-500,155,450,390),scrollPosition, Rect (0, 0, 0, 600), customscrollGUIHori, customscrollGUIVert);
+	scrollPosition = GUI.BeginScrollView (Rect (x-430,155,450,390),scrollPosition, Rect (0, 0, 0, 600), customscrollGUIHori, customscrollGUIVert);
 			
 			GUI.BeginGroup(Rect(15,0,470,150));
 				// image de la molécule

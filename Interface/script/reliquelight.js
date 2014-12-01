@@ -3,7 +3,7 @@
 
 
 var x : boolean = true;
-var timer : float = 0.8;
+var timer : float = 1.0;
 var timer2 : float = 0.0;
 function Start () {
 	
@@ -14,7 +14,7 @@ function relique(){
 		
 	var intensity = gameObject.light.intensity;
 	
-	if(x && intensity < 0.8){
+	if(x && intensity < 1.0){
 		timer2 = timer2 + Time.deltaTime;
 		gameObject.light.intensity = timer2;
 	}	
@@ -25,7 +25,7 @@ function relique(){
 		
 		if(timer < 0.0){
 			x = true;
-			timer = 0.8;
+			timer = 1.0;
 			timer2 = 0.0;
 		}
 	}
