@@ -10,13 +10,16 @@ function Start () {
 }
 
 function OnCollisionEnter2D(col : Collision2D){
-	if(col.gameObject.name != 'Arbre contour noir'){
+	
+	if(col.gameObject.name != 'Arbre contour noir' && col.gameObject.name != 'temple'){
 		health = health - 1;
 		blink();
 	}
 	if(health == 0){
 		Destroy(this.gameObject);
 	}
+	
+	return health;
 }
 
 function move(){
