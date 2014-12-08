@@ -101,7 +101,7 @@ function blink(){
 	var droite = GameObject.Find("Droite");
 	var gauche = GameObject.Find("Gauche");
 	
-	var tab = [bas, gauche, droite, bas];
+	var tab = [bas, gauche, droite, haut];
 	
 	tab[pos].renderer.enabled = false;
 	yield WaitForSeconds(0.25);
