@@ -119,35 +119,34 @@ function OnGUI(){
 	if(playerLife){
 		var otherscript = playerLife.GetComponent(move);
 		// assigning the new variable to a new health variable.
-		var healthp = otherscript.health;
+		var healthp : float = otherscript.health;
 		Debug.Log(healthp);
-		
 		if(healthp > 0){
-			if(healthp > 0){
+			if(healthp > 0.0){
 				GUI.DrawTexture(Rect(x-63,20,10,10), life);
 			}
-			if(healthp > 1){
+			if(healthp > 1.0){
 				GUI.DrawTexture(Rect(x-20,20,10,10), life);
 				GUI.DrawTexture(Rect(x-50,25,27,1), polymere); 
 			}
-			if(healthp > 2){
+			if(healthp > 2.0){
 				GUI.DrawTexture(Rect(x + 23,20,10,10), life);
 				GUI.DrawTexture(Rect(x-7,25,27,1), polymere); 
 			}
-			if(healthp > 3){
+			if(healthp > 3.0){
 				GUI.DrawTexture(Rect(x + 65,20,10,10), life);
 				GUI.DrawTexture(Rect(x+35,25,27,1), polymere);
 			}
-			if(healthp > 4){
+			if(healthp > 4.0){
 				GUI.DrawTexture(Rect(x+78,25,27,1), polymere);
 				GUI.DrawTexture(Rect(x + 108,20,10,10), life);
 			}
 		}
 	}
 	else{ 
-		GUI.Label(Rect(x-50,center - 100,300,300), "Vous avez perdu !", textStyle);
+		GUI.Label(Rect(x-90,center - 100,300,300), "Vous avez perdu !", textStyle);
 		
-		if(GUI.Button(Rect(x,center, 100,100), reload, customGuiStyle)){
+		if(GUI.Button(Rect(x-30,center, 100,100), reload, customGuiStyle)){
 			Application.LoadLevel("level1");
 		}
 	}

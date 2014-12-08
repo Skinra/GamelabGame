@@ -1,5 +1,5 @@
 ﻿#pragma strict
-public var health : int = 5;
+public var health : float = 5.0;
 private var loop : int = 0;
 private var pos : int;
 
@@ -12,10 +12,17 @@ function Start () {
 function OnCollisionEnter2D(col : Collision2D){
 	
 	if(col.gameObject.name != 'Arbre contour noir' && col.gameObject.name != 'temple'){
-		health = health - 1;
+		Debug.Log(col.gameObject.name);
+		if(col.gameObject.name == 'Ennemi_Left' || col.gameObject.name == 'Ennemi_Right' || col.gameObject.name == 'Ennemi_proche'){
+			health = health - 0.25;
+			Debug.Log('je passe par la');
+		}
+		else{
+			health = health - 1.0;
+		}
 		blink();
 	}
-	if(health == 0){
+	if(health <= 0){
 		Destroy(this.gameObject);
 	}
 	

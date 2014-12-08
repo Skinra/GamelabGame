@@ -13,6 +13,11 @@
   
  function Update () {
  
+  var enemyColl = this.GetComponent(enemyColl);
+  var health = enemyColl.mHealth;
+  
+  Debug.Log(health);
+  
   if(target){
   
   	var posEnemy = Vector2.Distance(this.transform.position, target.transform.position);
