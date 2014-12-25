@@ -1,29 +1,39 @@
 ﻿#pragma strict
 
-public var mHealth : float = 3.0;
+public var mHealth  : float;
+private var loop : int;
+var randomNumber : float;
 
-function Start () {
-
+function start(){
+	mHealth = 3.0;
+	loop = 0;
 }
 
-function OnCollisionEnter2D(col : Collision2D){
+function OnTriggerEnter2D(coll : Collider2D){
+	Debug.Log(coll.gameObject.name);
+	var coeur = new Vector2(this.transform.position.x + 0.1, this.transform.position.y);
+	var mercure = new Vector2(this.transform.position.x - 0.1, this.transform.position.y);
+	Debug.Log(coll.gameObject.name);
 	
-	if(col.gameObject.name != 'Arbre contour noir' && col.gameObject.name != 'temple' && col.gameObject.name != 'Ennemi_Left' && col.gameObject.name != 'Ennemi_Right' && col.gameObject.name != 'Ennemi_proche'){
-		if(col.gameObject.name == 'Player'){
-			mHealth = mHealth - 0.5;
-		}
-		else{
-			mHealth = mHealth - 0.95;
-		}
-		
-		//Debug.Log('la vie de l ennemie : '+mHealth);
+	if(coll.gameObject.name == 'shoot_player(Clone)'){
+		mHealth = mHealth - 1.0;
 	}
-	if(mHealth <= 0){
+	
+	if(mHealth < 0.0 || mHealth == 0){
+
+		randomNumber = Random.Range(0.0,2.0);
+		randomNumber = Mathf.Round(randomNumber * 1) / 1;
+		
+		// instancier que une fois
+		if(loop == 0){
+			if(this.gameObject.name == 'Ennemi_proche'){
+				Instantiate(Resources.Load('Coeur plein'), coeur ,Quaternion.identity);
+			}
+			else if(randomNumber == 1.0){
+				Instantiate(Resources.Load('Pièce Mercure'), mercure, Quaternion.identity);
+			}
+		}
 		Destroy(this.gameObject);
 	}
-
 }
 
-function Update () {
-
-}

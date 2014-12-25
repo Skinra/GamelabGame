@@ -1,25 +1,28 @@
 ﻿#pragma strict
-public var health : float = 5.0;
-private var loop : int = 0;
+public var health : float; 
+private var loop : int;
 private var pos : int;
+public var money : int;
 
-public var move_or_not : boolean = true;
 
-function Start () {
-	
+function start(){
+	health  = 5.0;
+	loop = 0;
+	money = 0;
 }
+
+private var move_or_not : boolean = true;
 
 function OnCollisionEnter2D(col : Collision2D){
 	
 	if(col.gameObject.name != 'Arbre contour noir' && col.gameObject.name != 'temple'){
-		Debug.Log(col.gameObject.name);
-		if(col.gameObject.name == 'Ennemi_Left' || col.gameObject.name == 'Ennemi_Right' || col.gameObject.name == 'Ennemi_proche'){
+		if(col.gameObject.name == 'Ennemi_left'){
 			health = health - 0.25;
-			Debug.Log('je passe par la');
 		}
 		else{
 			health = health - 1.0;
 		}
+		
 		blink();
 	}
 	if(health <= 0){
@@ -27,6 +30,20 @@ function OnCollisionEnter2D(col : Collision2D){
 	}
 	
 	return health;
+}
+
+function OnTriggerEnter2D(coll : Collider2D){
+	
+	if(coll.gameObject.name == 'Coeur plein(Clone)'){
+		health = health + 0.5;
+		Destroy(coll.gameObject);
+		Debug.Log(health);
+	}
+	else if(coll.gameObject.name == 'Pièce Mercure(Clone)'){
+		money = money + 10;
+		Destroy(coll.gameObject);
+		Debug.Log(money);
+	}
 }
 
 function move(){
@@ -129,5 +146,5 @@ function blink(){
 function Update () {
 	move();
 	player();
-	
+
 }

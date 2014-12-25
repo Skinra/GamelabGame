@@ -5,7 +5,7 @@ var boolfor2 : boolean = false;
 var boolfor3 : boolean = false;
 var boolfor4 : boolean = false;
 var boolfor5 : boolean = false;
-private var moneyValue : int = 500000;
+private var moneyValue : int;
 var customGuiStyle = new GUIStyle();
 var textStyle = new GUIStyle();
 
@@ -119,25 +119,26 @@ function OnGUI(){
 	if(playerLife){
 		var otherscript = playerLife.GetComponent(move);
 		// assigning the new variable to a new health variable.
-		var healthp : float = otherscript.health;
-		Debug.Log(healthp);
+		var healthp = otherscript.health;
+		moneyValue = otherscript.money;
+		
 		if(healthp > 0){
-			if(healthp > 0.0){
+			if(healthp > 0){
 				GUI.DrawTexture(Rect(x-63,20,10,10), life);
 			}
-			if(healthp > 1.0){
+			if(healthp > 1){
 				GUI.DrawTexture(Rect(x-20,20,10,10), life);
 				GUI.DrawTexture(Rect(x-50,25,27,1), polymere); 
 			}
-			if(healthp > 2.0){
+			if(healthp > 2){
 				GUI.DrawTexture(Rect(x + 23,20,10,10), life);
 				GUI.DrawTexture(Rect(x-7,25,27,1), polymere); 
 			}
-			if(healthp > 3.0){
+			if(healthp > 3){
 				GUI.DrawTexture(Rect(x + 65,20,10,10), life);
 				GUI.DrawTexture(Rect(x+35,25,27,1), polymere);
 			}
-			if(healthp > 4.0){
+			if(healthp > 4){
 				GUI.DrawTexture(Rect(x+78,25,27,1), polymere);
 				GUI.DrawTexture(Rect(x + 108,20,10,10), life);
 			}

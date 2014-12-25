@@ -9,15 +9,11 @@
       target = GameObject.Find("Player");
       StartPosX = this.transform.position.x;
       StartPosY = this.transform.position.y;
+      
  }
   
  function Update () {
  
-  var enemyColl = this.GetComponent(enemyColl);
-  var health = enemyColl.mHealth;
-  
-  Debug.Log(health);
-  
   if(target){
   
   	var posEnemy = Vector2.Distance(this.transform.position, target.transform.position);
@@ -86,5 +82,7 @@
 	}
 	
   }
+  
+  transform.rotation = Quaternion.identity;
 
  }
