@@ -15,7 +15,8 @@ private var move_or_not : boolean = true;
 
 function OnCollisionEnter2D(col : Collision2D){
 	
-	if(col.gameObject.name != 'Arbre contour noir' && col.gameObject.name != 'temple'){
+	if(col.gameObject.name != 'Arbre_ranger' && col.gameObject.name != 'temple' && col.gameObject.name != 'Arbre_right'
+	&& col.gameObject.name != 'Buisson2_container_droite' && col.gameObject.name != 'arbre_top' && col.gameObject.name != 'arbre_left'){
 		if(col.gameObject.name == 'Ennemi_left'){
 			health = health - 0.25;
 		}
