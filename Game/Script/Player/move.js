@@ -1,29 +1,25 @@
-﻿#pragma strict
+#pragma strict
 public var health : float; 
 private var loop : int;
 private var pos : int;
 public var money : int;
+public var fadeInactivate : boolean;
 
 
 function start(){
 	health  = 5.0;
 	loop = 0;
 	money = 0;
+	fadeInactivate = false;
 }
 
 private var move_or_not : boolean = true;
 
 function OnCollisionEnter2D(col : Collision2D){
+		// ajouter les autres monstres...
 	
-	if(col.gameObject.name != 'Arbre_ranger' && col.gameObject.name != 'temple' && col.gameObject.name != 'Arbre_right'
-	&& col.gameObject.name != 'Buisson2_container_droite' && col.gameObject.name != 'arbre_top' && col.gameObject.name != 'arbre_left'){
-		if(col.gameObject.name == 'Ennemi_left'){
-			health = health - 0.25;
-		}
-		else{
-			health = health - 1.0;
-		}
-		
+	if(col.gameObject.name == 'Ennemi_Left'){
+		health--;
 		blink();
 	}
 	if(health <= 0){
@@ -31,6 +27,8 @@ function OnCollisionEnter2D(col : Collision2D){
 	}
 	
 	return health;
+	
+	
 }
 
 function OnTriggerEnter2D(coll : Collider2D){
@@ -45,11 +43,16 @@ function OnTriggerEnter2D(coll : Collider2D){
 		Destroy(coll.gameObject);
 		Debug.Log(money);
 	}
+	else if(coll.gameObject.name == "teleporteur_autre"){
+		Debug.Log(coll.gameObject.name);
+		Debug.Log(fadeInactivate);
+		fadeInactivate = true;
+	}
 }
 
 function move(){
     // deplacement gauche droite 
-    
+
     if(move_or_not){
     		var inputx : float = Input.GetAxis("Horizontal");
     
