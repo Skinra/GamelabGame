@@ -8,7 +8,6 @@ function Start () {
 }
 
 function fadeOut(){
-	Debug.Log(fade);
 	if(fade > 0.0){
 		renderer.material.color = Color(0,0,0,fade);
 		fade = fade - 0.01;
@@ -19,6 +18,30 @@ function fadeOut(){
 	}
 }
 
+function fadeIn(){
+	if(fade < 1.0){
+		renderer.material.color = Color(0,0,0,fade);
+		fade = fade + 0.01;
+		yield WaitForSeconds(3);
+	}
+	else if(fade > 1.0){
+		renderer.material.color = Color(0,0,0,1);
+	}
+}
+
 function Update () {
-	fadeOut();
+	var collision = GameObject.Find("Player");
+	
+	if(collision){
+		var valeur = collision.GetComponent(move);
+		var fadeInActivate = valeur.fadeInactivate;
+		
+		if(fadeInActivate){
+			fadeIn();	
+		}
+		else{
+			fadeOut();
+		}
+	}
+
 }
