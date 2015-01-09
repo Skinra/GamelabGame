@@ -17,10 +17,12 @@ var prixAtome = ['$50000', '$10000', '$500', '$25000'];
 var fioleArray = ['fiole1', 'fiole2', 'fiole3', 'fiole4'];
 var prixFiole = ['$1', '$2', '$0.5', '$50'];
 
+var fadeValue : int = 0;
+
 function Start () {
 	customGuiStyle.fontSize = 18;
 	customGuiStyle.normal.textColor = Color.white;
-	customGuiStyle.font = Resources.Load("small_font");
+	customGuiStyle.font = Resources.Load("small_font") as Font;
 	customGuiStyle.wordWrap = true;
 }
 
@@ -30,16 +32,17 @@ function OnGUI(){
 	var h = Screen.height;
 	
 	// Interface de base
-	var ButtonExit : Texture = Resources.Load("exit");
-	var vBar : Texture = Resources.Load("Vbar");
-	var hBar : Texture = Resources.Load("hBar");
+	var ButtonExit = Resources.Load("exit") as Texture2D;
+	var vBar = Resources.Load("Vbar") as Texture2D;
+	var hBar = Resources.Load("hBar") as Texture2D;
 	
 	//texture pour le dimensionnement
-	var testTexture : Texture = Resources.Load("testTexture");
-	var childrentestTexture : Texture = Resources.Load("testTexture2");
+	var testTexture = Resources.Load("testTexture") as Texture2D;
+	var childrentestTexture = Resources.Load("testTexture2") as Texture2D;
 	
 	if(GUI.Button(Rect(x,0,100,100), ButtonExit, customGuiStyle)){
-		Application.LoadLevel("Interface");
+		fadeValue = 1;
+		launchScene();
 	}
 	
 	GUI.DrawTexture(Rect(x + 50,70,1,h), vBar);
@@ -53,7 +56,7 @@ function OnGUI(){
 			
 			GUI.BeginGroup(Rect(15,0,470,150));
 				// image de la molécule
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -64,7 +67,7 @@ function OnGUI(){
 			
 			GUI.BeginGroup(Rect(15,145,470,150));
 				// image de la molécule
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric  ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -74,7 +77,7 @@ function OnGUI(){
 			
 			GUI.BeginGroup(Rect(15,290,470,150));
 				// image de la molécule
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -84,7 +87,7 @@ function OnGUI(){
 		
 			GUI.BeginGroup(Rect(15,435,470,150));
 				// image de la molécule
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(atomeArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -99,7 +102,7 @@ function OnGUI(){
 		scrollPosition2 = GUI.BeginScrollView(Rect(x+50,155,450,390),scrollPosition2, Rect(x+50, 0, 0, 600));
 		
 			GUI.BeginGroup(Rect(x+75,0,470,390), childrentestTexture);
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -108,7 +111,7 @@ function OnGUI(){
 			GUI.EndGroup();
 			
 			GUI.BeginGroup(Rect(x+75,145, 470,390), childrentestTexture);
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -117,7 +120,7 @@ function OnGUI(){
 			GUI.EndGroup();
 			
 			GUI.BeginGroup(Rect(x+75,290, 470,390), childrentestTexture);
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -126,7 +129,7 @@ function OnGUI(){
 			GUI.EndGroup();
 			
 			GUI.BeginGroup(Rect(x+75,435, 470,390), childrentestTexture);
-				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]), customGuiStyle)){
+				if(GUI.Button(Rect(0,35,65,65),Resources.Load(fioleArray[0]) as Texture2D, customGuiStyle)){
 				}
 				// texte de la molécule
 				GUI.Label(Rect(75,25, 300, 500 ),"Hi there we're gamelab our member are maxime, alexis, marc, thibault, and eric ! and we make super fucking amazing cool game, check it out !", customGuiStyle);
@@ -151,6 +154,27 @@ function getIsound(){
 	}
 }
 
+function callfade(number){
+	
+	var quad = GameObject.Find("Quad");
+	
+	if(number == 1){
+		quad.GetComponent(interface_transition).fadeIn();
+	}
+	else{
+		quad.GetComponent(interface_transition).fadeOut();
+	}
+	
+}
+
+function launchScene(){
+	yield WaitForSeconds(3);
+	Application.LoadLevel("interface");
+}
+
+
+
 function Update () {
 	getIsound();
+	callfade(fadeValue);
 }

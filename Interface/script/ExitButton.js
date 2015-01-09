@@ -10,16 +10,17 @@ private var loop : int = 0;
 private var oldValue : boolean;
 var activeornot : int;
 
+var fadeValue : int = 0;
 
 function Start () {
 	customGuiStyle.fontSize = 18;
 	customGuiStyle.normal.textColor = Color.white;
-	customGuiStyle.font = Resources.Load("small_font");
+	customGuiStyle.font = Resources.Load("small_font") as Font;
 	loop = 0;
 }
 
 function OnGUI(){
-
+	
 	var soundObj = gameObject.Find("Developers");
 	
 	var x = (Screen.width / 2) - 50;
@@ -28,11 +29,11 @@ function OnGUI(){
 	
 	// button
 	
-	var buttonTrue : Texture = Resources.Load("on");
-	var buttonFalse : Texture = Resources.Load("off");
+	var buttonTrue : Texture = Resources.Load("on") as Texture2D;
+	var buttonFalse : Texture = Resources.Load("off") as Texture2D;
 	
-	var ButtonExit : Texture = Resources.Load("exit");
-	var bar : Texture = Resources.Load("bar");
+	var ButtonExit : Texture = Resources.Load("exit") as Texture2D;
+	var bar : Texture = Resources.Load("bar") as Texture2D;
 	
 	if(loop == 0){
 		activeornot = PlayerPrefs.GetInt("activateingui");
@@ -56,7 +57,8 @@ function OnGUI(){
 	toggleGsound = GUI.Toggle(Rect(x + 220, h + 80,40,40),toggleGsound, buttonFalse, customGuiStyle);
 	
 	if(GUI.Button(Rect(x,0,100,100), ButtonExit, customGuiStyle)){
-		Application.LoadLevel("Interface");
+		fadeValue = 1;
+		launchScene();
 	}
 	
 	if(toggleIsound){
@@ -78,6 +80,25 @@ function saveIsound(toggleIsound){
 	PlayerPrefs.SetInt("Activate", toggleIsound);
 }
 
-function Update (){
+function callfade(number){
 	
+	var quad = GameObject.Find("Quad");
+	
+	if(number == 1){
+		quad.GetComponent(interface_transition).fadeIn();
+	}
+	else{
+		quad.GetComponent(interface_transition).fadeOut();
+	}
+	
+}
+
+function launchScene(){
+	yield WaitForSeconds(3);
+	Application.LoadLevel("interface");
+}
+
+
+function Update (){
+	callfade(fadeValue);
 }

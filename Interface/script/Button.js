@@ -1,12 +1,8 @@
 ﻿#pragma strict
 
 var customGuiStyle : GUIStyle;
-
-function Start () {
-
-}
-
-
+var timer :float = 0.0;
+var fadeValue : int = 0;
 
 function OnGUI(){
 
@@ -16,26 +12,28 @@ function OnGUI(){
 	var y = Screen.height / 3;
 	
 	// texture
-	var buttonPlay : Texture = Resources.Load('buttonPlay');
-	var buttonBoutique : Texture = Resources.Load('buttonStore');
-	var buttonSettings : Texture = Resources.Load('buttonSettings');
-	var leftarrow : Texture = Resources.Load('left');
-	var rightarrow : Texture = Resources.Load('right');
+	var buttonPlay  = Resources.Load('buttonPlay') as Texture2D;
+	var buttonBoutique  = Resources.Load('buttonStore') as Texture2D;
+	var buttonSettings  = Resources.Load('buttonSettings') as Texture2D;
+	var leftarrow  = Resources.Load('left') as Texture2D;
+	var rightarrow  = Resources.Load('right') as Texture2D;
 	
 	GUI.DrawTexture(Rect(x - 100, y + 150, 100,100), leftarrow);
     GUI.DrawTexture(Rect(x + 50, y + 175, 100,100), rightarrow);
 
     if(GUI.Button(Rect(x - 50 ,y + 100 ,125,125), buttonPlay, customGuiStyle)){
-    	Debug.Log('Play');
+		fadeValue = 1;
+		launchScene(0);
     }
     
     if(GUI.Button(Rect(x - 150,y + 225, 80, 80), buttonBoutique, customGuiStyle)){
-    	Application.LoadLevel('Store');
+    	fadeValue = 1;
+    	launchScene(1);
     }
     
     if(GUI.Button(Rect(x + 100, y + 225, 80,80), buttonSettings, customGuiStyle)){
-    	Debug.Log('Settings');
-    	Application.LoadLevel("Parametre");
+    	fadeValue = 1;
+    	launchScene(2);
     }
 }
 
@@ -54,6 +52,35 @@ function getIsound(){
 	}
 }
 
+function callfade(number){
+	
+	var quad = GameObject.Find("Quad");
+	
+	if(number == 1){
+		quad.GetComponent(interface_transition).fadeIn();
+	}
+	else{
+		quad.GetComponent(interface_transition).fadeOut();
+	}
+	
+}
+
+function launchScene(valeur){
+	if(valeur == 0){
+		yield WaitForSeconds(3);
+		//Application.LoadLevel('Store');    	
+	}
+	else if(valeur == 1){
+		yield WaitForSeconds(3);
+		Application.LoadLevel('Store');    	
+	}
+	else{
+		yield WaitForSeconds(3);
+		Application.LoadLevel("Parametre");
+	}
+}
+	
 function Update () {
 	getIsound();
+	callfade(fadeValue);
 }
