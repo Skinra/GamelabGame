@@ -3,6 +3,11 @@
 var customGuiStyle : GUIStyle;
 var timer :float = 0.0;
 var fadeValue : int = 0;
+private var activateGUI : boolean;
+
+function Start(){
+	activateGUI = false;
+}
 
 function OnGUI(){
 
@@ -10,6 +15,7 @@ function OnGUI(){
 
 	var x = Screen.width / 2;
 	var y = Screen.height / 3;
+
 	
 	// texture
 	var buttonPlay  = Resources.Load('buttonPlay') as Texture2D;
@@ -18,23 +24,26 @@ function OnGUI(){
 	var leftarrow  = Resources.Load('left') as Texture2D;
 	var rightarrow  = Resources.Load('right') as Texture2D;
 	
-	GUI.DrawTexture(Rect(x - 100, y + 150, 100,100), leftarrow);
-    GUI.DrawTexture(Rect(x + 50, y + 175, 100,100), rightarrow);
-
-    if(GUI.Button(Rect(x - 50 ,y + 100 ,125,125), buttonPlay, customGuiStyle)){
-		fadeValue = 1;
-		launchScene(0);
-    }
-    
-    if(GUI.Button(Rect(x - 150,y + 225, 80, 80), buttonBoutique, customGuiStyle)){
-    	fadeValue = 1;
-    	launchScene(1);
-    }
-    
-    if(GUI.Button(Rect(x + 100, y + 225, 80,80), buttonSettings, customGuiStyle)){
-    	fadeValue = 1;
-    	launchScene(2);
-    }
+	if(activateGUI){
+	
+		GUI.DrawTexture(Rect(x - 100, y + 150, 100,100), leftarrow);
+    	GUI.DrawTexture(Rect(x + 50, y + 175, 100,100), rightarrow);
+    	
+	    if(GUI.Button(Rect(x - 50 ,y + 100 ,125,125), buttonPlay, customGuiStyle)){
+			fadeValue = 1;
+			launchScene(0);
+	    }
+	    
+	    if(GUI.Button(Rect(x - 150,y + 225, 80, 80), buttonBoutique, customGuiStyle)){
+	    	fadeValue = 1;
+	    	launchScene(1);
+	    }
+	    
+	    if(GUI.Button(Rect(x + 100, y + 225, 80,80), buttonSettings, customGuiStyle)){
+	    	fadeValue = 1;
+	    	launchScene(2);
+	    }
+	 }
 }
 
 function getIsound(){
@@ -55,6 +64,7 @@ function getIsound(){
 function callfade(number){
 	
 	var quad = GameObject.Find("Quad");
+	var fadeValue = quad.GetComponent(interface_transition).fade;
 	
 	if(number == 1){
 		quad.GetComponent(interface_transition).fadeIn();
@@ -63,21 +73,32 @@ function callfade(number){
 		quad.GetComponent(interface_transition).fadeOut();
 	}
 	
+	// test fade value
+	
+	if(fadeValue < 0.2){
+		activateGUI = true;
+	}
+	else{
+		activateGUI = false;
+	}
+	
 }
 
 function launchScene(valeur){
+	
 	if(valeur == 0){
-		yield WaitForSeconds(3);
-		//Application.LoadLevel('Store');    	
+		yield WaitForSeconds(2);
+		Application.LoadLevel('Level1');    	
 	}
 	else if(valeur == 1){
-		yield WaitForSeconds(3);
+		yield WaitForSeconds(2);
 		Application.LoadLevel('Store');    	
 	}
 	else{
-		yield WaitForSeconds(3);
+		yield WaitForSeconds(2);
 		Application.LoadLevel("Parametre");
 	}
+	
 }
 	
 function Update () {

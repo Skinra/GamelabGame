@@ -10,24 +10,24 @@ function Start () {
 
 function fadeOut(){
 	if(fade > 0.0){
-		renderer.material.color = Color(255,255,255,fade);
+		renderer.material.color = Color(0,0,0,fade);
 		fade = fade - 0.01;
 		yield WaitForSeconds(1);
 	}
 	else if(fade < 0.0){
-		renderer.material.color = Color(255,255,255,0);
+		renderer.material.color = Color(0,0,0,0);
 	}
 }
 
 function fadeIn(){
 
 	if(fade < 1.0){
-		renderer.material.color = Color(255,255,255,fade);
+		renderer.material.color = Color(0,0,0,fade);
 		fade = fade + 0.01;
 		yield WaitForSeconds(1);
 	}
 	else if(fade > 1.0){
-		renderer.material.color = Color(255,255,255,1);
+		renderer.material.color = Color(0,0,0,1);
 	}
 }
 
