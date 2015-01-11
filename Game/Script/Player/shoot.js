@@ -3,6 +3,7 @@ var firerate : float = 0.5;
 var nextFire : float = 1.0;
 
 function Start () {
+
 }
 function Update () {
 	var player = gameObject.Find('Player');
@@ -35,5 +36,16 @@ function Update () {
 		}
 	}
 	
+	if(Input.GetKey(KeyCode.V)){
+		if(Time.time / 2 > nextFire){
+		
+		nextFire = Time.time / 2 + 2;
+		
+		var zone : GameObject = Instantiate(Resources.Load('Attaquezone'), player.transform.position ,player.transform.rotation);
+		
+		
+		
+		}
+		}
 	
 }
