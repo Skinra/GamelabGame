@@ -1,9 +1,10 @@
-#pragma strict
+﻿#pragma strict
 public var health : float; 
 private var loop : int;
-private var pos : int;
+public var pos : int;
 public var money : int;
 public var fadeInactivate : boolean;
+
 
 
 function start(){
@@ -22,31 +23,37 @@ function OnCollisionEnter2D(col : Collision2D){
 		health--;
 		blink();
 	}
+	else if(col.gameObject.name == "cuve"){
+		PlayerPrefs.SetInt("active", 1);
+	}
 	if(health <= 0){
 		Destroy(this.gameObject);
 	}
-	
-	return health;
-	
-	
 }
 
 function OnTriggerEnter2D(coll : Collider2D){
-	
-	if(coll.gameObject.name == 'Coeur plein(Clone)'){
-		health = health + 0.5;
-		Destroy(coll.gameObject);
-		Debug.Log(health);
-	}
-	else if(coll.gameObject.name == 'Pièce Mercure(Clone)'){
-		money = money + 10;
-		Destroy(coll.gameObject);
-		Debug.Log(money);
-	}
-	else if(coll.gameObject.name == "teleporteur_autre"){
-		Debug.Log(coll.gameObject.name);
-		Debug.Log(fadeInactivate);
-		fadeInactivate = true;
+
+	switch (coll.gameObject.name){
+		
+		case "Coeur plein(Clone)" :
+			health = health + 0.5;
+			Destroy(coll.gameObject);
+		break;
+		case "Pièce Mercure(Clone)" :
+			money = money + 10;
+			Destroy(coll.gameObject);
+		break;
+		case "teleporteur_autre" :
+			fadeInactivate = true;
+			yield WaitForSeconds(2);
+			Application.LoadLevel("Laboratoire");
+		break;
+		case "teleporteur_level" :
+			fadeInactivate = true;
+			yield WaitForSeconds(2);
+			Application.LoadLevel("Level1");
+		break;
+
 	}
 }
 
