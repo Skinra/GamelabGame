@@ -7,14 +7,24 @@ public static var moleculeFormula;
 
 public var formule = ['C3H6O', 'O2', 'CH4'];
 public var formule2 = ['LOX', 'C3H5N3O9', 'LH2'];
+public var formule3 = ['XO','OX','GG'];
+public var formule4 = ['CH', 'MA', 'IP'];
+public var formule5 = ['OX', 'LU', 'MU'];
 // regroupement de variable de molecule
-public var recapFormule = [formule, formule2];
+public var recapFormule = [formule, formule2, formule3, formule4, formule5];
 
 // variable texte
 public var formuleTexte = ['J aime mangé des Charlotte au fraise', 'Tahiiiiiiiiiiiiiiitiiiiiii', 'Mais ce sont des thug chez Gamelab #thuglife'];
 public var formuleTexte2 = ['LE PSG VA GAGNE CE SOIR', 'Le paté de campagne de Thibault', 'Amour fou entre Alexis et Rachel, great !'];
+public var formuleTexte3 = ['Les', 'Asiat', 'Sont'];
+public var formuleTexte4 = ['meilleurs', 'nigga', '!'];
+public var formuleTexte5 = ['do', 'you', 'eat'];
 
-public var recapTexte = [formuleTexte, formuleTexte2];
+// enregistrer les différentes valeurs des molecules.
+// creation d'un tableau de sauvegarde de molecule
+
+public var choixFormule = new String[5];
+public var recapTexte = [formuleTexte, formuleTexte2, formuleTexte3, formuleTexte4, formuleTexte5];
 
 
 function Start () {
@@ -23,9 +33,9 @@ function Start () {
 	customGuiStyle2.wordWrap = true;
 	customGuiStyle.normal.textColor = Color.black;
 	customGuiStyle.font = Resources.Load("small_font") as Font;
-	
 	customGuiStyle.wordWrap = true;
 	autorisation = false;
+	choixFormule = PlayerPrefsX.GetStringArray("UseFormule");
 }
 
 function OnGUI(){
@@ -75,7 +85,8 @@ function OnGUI(){
 				for(var i in recapFormule[id]){
 				
 					if(GUI.Button(Rect(20, 25 + yOffset,60,69), Resources.Load(i) as Texture2D,  customGuiStyle)){
-						Debug.Log(i);
+						choixFormule[id] = i;
+						Debug.Log("case du tableau numero "+id+" sa valeur est "+choixFormule[id]);
 					}
 					GUI.Label(Rect(170, 25 + yOffset, 200,150), i, customGuiStyle);
 					yOffset += 100;
@@ -92,19 +103,23 @@ function OnGUI(){
 				switch (id){
 					case 0:
 						GUI.DrawTexture(Rect(x2+25,h*0.6,180,208), Resources.Load(chemicalB[0]));
-						
+						GUI.Label(Rect(x2+80,h+150,100,208), choixFormule[0], customGuiStyle2);
 					break;
 					case 1:
-						GUI.DrawTexture(Rect(x2,h*0.65,139,161), Resources.Load(chemicalB[1]));
+						GUI.DrawTexture(Rect(x2+25,h*0.6,180,208), Resources.Load(chemicalB[1]));
+						GUI.Label(Rect(x2+80,h+150,100,208), choixFormule[1], customGuiStyle2);
 					break;
 					case 2:
-						GUI.DrawTexture(Rect(x2,h*0.65,139,161), Resources.Load(chemicalB[2]));
+						GUI.DrawTexture(Rect(x2+25,h*0.6,180,208), Resources.Load(chemicalB[2]));
+						GUI.Label(Rect(x2+80,h+150,100,208), choixFormule[2], customGuiStyle2);
 					break;
 					case 3:
-						GUI.DrawTexture(Rect(x2,h*0.65,139,161), Resources.Load(chemicalB[3]));
+						GUI.DrawTexture(Rect(x2+25,h*0.6,180,208), Resources.Load(chemicalB[3]));
+						GUI.Label(Rect(x2+80,h+150,100,208), choixFormule[3], customGuiStyle2);
 					break;
 					case 4:
-						GUI.DrawTexture(Rect(x2,h*0.65,139,161), Resources.Load(chemicalB[4]));
+						GUI.DrawTexture(Rect(x2+25,h*0.6,180,208), Resources.Load(chemicalB[4]));
+						GUI.Label(Rect(x2+80,h+150,100,208), choixFormule[4], customGuiStyle2);
 					break;
 				}
 			};
@@ -120,7 +135,7 @@ function OnGUI(){
 	
 	// close the gui
 	if(Input.GetKeyDown(KeyCode.X)){
-		Debug.Log("passe");
+		PlayerPrefsX.SetStringArray ("UseFormule", choixFormule);
 		PlayerPrefs.SetInt("active", 0);
 		autorisation = false;
 	}
