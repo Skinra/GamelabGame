@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 public var mHealth  : float;
 private var loop : int;
@@ -17,6 +17,18 @@ function OnTriggerEnter2D(coll : Collider2D){
 	
 	if(coll.gameObject.name == 'shoot_player(Clone)'){
 		mHealth = mHealth - 1.0;
+	}
+	
+	else if(coll.gameObject.name == 'Attaquezone(Clone)'){
+		mHealth = mHealth - 2.0;
+	}
+	
+	else if(coll.gameObject.name == 'Lazer5(Clone)'){
+		mHealth = mHealth - 3.0;
+	}
+	
+	else if(coll.gameObject.name == 'explosion3(Clone)'){
+		mHealth = mHealth - 3.0;
 	}
 	
 	if(mHealth < 0.0 || mHealth == 0){
