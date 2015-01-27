@@ -2,14 +2,14 @@ var customGuiStyle : GUIStyle;
 var customGuiStyle2 : GUIStyle;
 var autorisation : boolean;
 var id : int;
-public static var displayFormula;
-public static var moleculeFormula;
+
+public  var moleculeFormula;
 
 public var formule = ['C3H6O', 'O2', 'CH4'];
 public var formule2 = ['LOX', 'C3H5N3O9', 'LH2'];
 public var formule3 = ['XO','OX','GG'];
 public var formule4 = ['CH', 'MA', 'IP'];
-public var formule5 = ['OX', 'LU', 'MU'];
+public var formule5 = ['acide', 'LU', 'MU'];
 // regroupement de variable de molecule
 public var recapFormule = [formule, formule2, formule3, formule4, formule5];
 
@@ -18,13 +18,14 @@ public var formuleTexte = ['J aime mangé des Charlotte au fraise', 'Tahiiiiiiii
 public var formuleTexte2 = ['LE PSG VA GAGNE CE SOIR', 'Le paté de campagne de Thibault', 'Amour fou entre Alexis et Rachel, great !'];
 public var formuleTexte3 = ['Les', 'Asiat', 'Sont'];
 public var formuleTexte4 = ['meilleurs', 'nigga', '!'];
-public var formuleTexte5 = ['do', 'you', 'eat'];
+public var formuleTexte5 = ['H2SO4', 'you', 'eat'];
 
 // enregistrer les différentes valeurs des molecules.
 // creation d'un tableau de sauvegarde de molecule
 
-public var choixFormule = new String[5];
+public var choixFormule : String[] = new String[5];
 public var recapTexte = [formuleTexte, formuleTexte2, formuleTexte3, formuleTexte4, formuleTexte5];
+
 
 
 function Start () {
@@ -35,10 +36,16 @@ function Start () {
 	customGuiStyle.font = Resources.Load("small_font") as Font;
 	customGuiStyle.wordWrap = true;
 	autorisation = false;
-	choixFormule = PlayerPrefsX.GetStringArray("UseFormule");
+	
+	if(PlayerPrefsX.GetStringArray("UseFormule").length != 0){
+		choixFormule = PlayerPrefsX.GetStringArray("UseFormule");
+	}
+
 }
 
 function OnGUI(){
+Debug.Log(choixFormule.length);
+	
 
 	var isactivate = PlayerPrefs.GetInt("active");
 	
@@ -76,8 +83,7 @@ function OnGUI(){
 			}
 			
 			// function which display molecule
-
-			var i : int;		
+		
 			moleculeFormula = function(id){
 				var yOffset = 0;
 				var yOffset2 = 0;
@@ -96,9 +102,9 @@ function OnGUI(){
 						GUI.Label(Rect(100, 50 + yOffset2, 190,150), k, customGuiStyle2);
 						yOffset2 += 100;
 				}
-			};
+			};	
 			
-			displayFormula = function(id){
+			var displayFormula = function(id){
 		
 				switch (id){
 					case 0:
@@ -130,6 +136,7 @@ function OnGUI(){
 			// when a new molecule has been choose, use prototype to redefine the function
 			
 			GUI.DrawTexture(Rect(x2 - 100,10,3,h*1.9), bar);
+			GUI.Label(Rect(x2+15, h*1.8, 200, 200), "Press X to quit and save", customGuiStyle2);
 		GUI.EndGroup();
 	}
 	
