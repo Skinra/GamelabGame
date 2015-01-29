@@ -1,54 +1,36 @@
-﻿var x : boolean = true;
-var timer : float = 1.5;
-var timer2 : float = 0.2;
-var lighttimer : boolean = true;
+var x : boolean;
+var timer2 : float;
 var otherLight;
 var otherLight2;
 
+var minIntensity : float;
+var maxIntensity : float;
 
-function Start () {
-	
+function Start(){
+	minIntensity = 0.0f;
+	maxIntensity = 1.8f;
+	x = true;
+	this.gameObject.light.intensity = minIntensity;
 }
 
-
-function relique(){	
-	var intensity = gameObject.light.intensity;
-
-	if(x && intensity < 1.5){
-		
-		timer2 = timer2 + Time.deltaTime * 0.1;
-		gameObject.light.intensity = timer2;
-		lighttimer = true;
-	}	
-	else if(intensity > 1.5 && lighttimer){
-		yield WaitForSeconds(900);
-		lighttimer = false;
-		yield WaitForSeconds(900);
-		
+function ambiantLight(){
+	timer2 += Mathf.Clamp(Time.deltaTime, 0.0, 30.0);
+	
+	if(timer2 > 30){
+		x = !x;
+		timer2 = 0;
 	}
-	else if(intensity < 0.2 && lighttimer == false){
-		yield WaitForSeconds(900);
-		lighttimer = true;
-		yield WaitForSeconds(900);
-	}
-	else{
-		
-		x = false;
-		timer = timer - Time.deltaTime * 0.1;
-		gameObject.light.intensity = timer;
-		
-		if(timer < 0.0){
-			x = true;
-			timer = 1.5;
-			timer2 = 0.2;
-		}
 
+	if(x){
+		light.intensity = Mathf.Lerp(minIntensity, maxIntensity, timer2 * 0.1);
+	}
+	else if(!x){
+		light.intensity = Mathf.Lerp(maxIntensity, minIntensity, timer2 * 0.1);
 	}
 }
 
 function Update () {
-	relique();
-	
+	ambiantLight();
 	
 	otherLight = GameObject.Find('Point light 2');
 	otherLight2 = GameObject.Find('Point light');
@@ -57,13 +39,16 @@ function Update () {
 		if(otherLight){
 			otherLight.light.intensity = 0.0;
 		}
-		otherLight2.light.intensity = 0.0;
+		if(otherLight2){
+			otherLight2.light.intensity = 0.0;
+		}
 	}
 	else{
 		if(otherLight){
-			otherLight.light.intensity = 1.0;
+			otherLight.light.intensity = 8.0;
 		}
-		otherLight2.light.intensity = 1.0;
-	}
-		
+		if(otherLight2){
+			otherLight2.light.intensity = 1.0;
+		}
+	}	
 }
